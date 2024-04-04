@@ -10,6 +10,7 @@ class Blog extends React.Component
         this.repos=props.repos;
         this.user=props.user;
         this.list=!!props.list;
+        this.showauthor=!!props.showauthor;
         this.state={};
     }
     fetch(url)
@@ -25,6 +26,8 @@ class Blog extends React.Component
         let json=JSON.parse(this.fetch(url));
         this.setState({title: json['title']});
         this.setState({body: json['body']});
+        let userpro=JSON.parse(this.fetch(json['user']['url']));
+        this.setState({author: userpro['name']})
     }
     /*componentDidMount()
     {
@@ -47,11 +50,17 @@ class Blog extends React.Component
             console.log('body');
             a=<><br /><h1>{this.state.title}</h1><p>{this.state.body}</p></>;
         }*/
+        let tit=this.state.title;
+        if(this.showauthor)
+        {
+            tit+=' - ';
+            tit+=this.state.author;
+        }
         const a = this.list ? (
             <>
                 <center><h2>
                     <a className="blogitem" href={"#/blog/" + this.id}>
-                        {this.state.title}
+                        {tit}
                     </a>
                 </h2></center>
             </>

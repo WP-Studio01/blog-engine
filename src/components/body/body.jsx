@@ -3,8 +3,8 @@ import Home from '../home/home'
 import Bloglist from '../bloglist/bloglist'
 import Blog from '../blog/blog'
 
-let repos='blogdata';   //可移植
-let user='WP-Studio01'; //可移植
+let repos='blogdata';
+let user='WP-Studio01';
 class Body extends React.Component
 {
     constructor(props)
@@ -37,12 +37,12 @@ class Body extends React.Component
         }
         else if(hash=="#/blog")
         {
-            element=<Bloglist repos={repos} user={user} />;
+            element=<Bloglist repos={repos} user={user} showother />;
         }
         else if(/^#\/blog\/\d+$/.test(hash))
         {
             let id=hash.split('/').at(-1);
-            element=<Blog id={id} repos={repos} user={user} showother />
+            element=<Blog id={id} repos={repos} user={user} />
         }
         else
         {

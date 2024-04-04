@@ -8,8 +8,8 @@ class Bloglist extends React.Component
         super(props);
         this.repos=props.repos;
         this.user=props.user;
-        this.showother=props.showother;
-        this.showclose=props.showclose;
+        this.showother=!!props.showother;
+        this.showclose=!!props.showclose;
     }
     fetch(url)
     {
@@ -36,7 +36,12 @@ class Bloglist extends React.Component
         let json=JSON.parse(issues);
         for(let i of json)
         {
-            arr.push(<Blog id={i['number']} repos={this.repos} user={this.user} list />);
+            let item;
+            if(this.showother)
+                item=<Blog id={i['number']} repos={this.repos} user={this.user} list showauthor />;
+            else
+                item=<Blog id={i['number']} repos={this.repos} user={this.user} list />;
+            arr.push(item);
         }
         return <>{arr}</>;
     }
