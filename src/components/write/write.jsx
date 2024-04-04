@@ -20,6 +20,7 @@ class Write extends React.Component
                     break;
                 case 'token':
                     token=i.value;
+                    window.localStorage.setItem('token',i.value);
                     break;
             }
         }
@@ -38,7 +39,8 @@ class Write extends React.Component
             {
                 if(xhr.status==201)
                 {
-                    window.alert('Create successed');
+                    window.location.hash='#/blog';
+                    return;
                 }
                 else
                 {
@@ -53,7 +55,7 @@ class Write extends React.Component
             <div className='writeform'>
                 <label>Title:</label>&emsp;<input type={'text'} name='title' /><br />
                 <label>Content:</label>&emsp;<textarea rows={10} cols={30} name='content'></textarea><br />
-                <label>Token:</label>&emsp;<input type={'password'} name='token' /><br />
+                <label>Token:</label>&emsp;<input type={'password'} name='token' value={window.localStorage.getItem('token')} /><br />
                 <button onClick={this.onsubmit}>Submit</button>
             </div>
         </>;
