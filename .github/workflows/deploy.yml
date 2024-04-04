@@ -17,5 +17,5 @@ jobs:
       - name: Deploy to production repository
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.S_TOKEN }}
+          github_token: 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
           publish_dir: ./build
