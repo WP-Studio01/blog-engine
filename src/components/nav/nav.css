@@ -1,0 +1,7 @@
+.menuitem {
+    border: 2px solid black;
+    margin: 2px;
+    padding: 2px;
+    white-space: nowrap;
+    background-color: rgb(230,230,230);
+}
