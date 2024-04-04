@@ -2,6 +2,7 @@ import React from 'react'
 import Home from '../home/home'
 import Bloglist from '../bloglist/bloglist'
 import Blog from '../blog/blog'
+import Write from '../write/write'
 
 let repos='blogdata';
 let user='WP-Studio01';
@@ -43,6 +44,10 @@ class Body extends React.Component
         {
             let id=hash.split('/').at(-1);
             element=<Blog id={id} repos={repos} user={user} />
+        }
+        else if(hash=='#/write')
+        {
+            element=<Write />;
         }
         else
         {

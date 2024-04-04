@@ -4,7 +4,7 @@ import Body from './components/body/body'
 function App() {
   return (
     <>
-      <Nav title={['Home','Blogs']} hrefs={['#/home','#/blog']} />
+      <Nav title={['Home','Blogs','Write']} hrefs={['#/home','#/blog','#/write']} />
       <Body />
     </>
   );
