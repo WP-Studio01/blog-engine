@@ -10,6 +10,7 @@ class Bloglist extends React.Component
         this.user=props.user;
         this.showother=!!props.showother;
         this.showclose=!!props.showclose;
+        this.state={blogs: []};
     }
     fetch(url)
     {
@@ -17,6 +18,12 @@ class Bloglist extends React.Component
         xhr.open('GET',url,false);
         xhr.send(null);
         return xhr.responseText;
+    }
+    componentDidMount()
+    {
+        setTimeout(async ()=>{
+            return 0;
+        },0);
     }
     render()
     {
@@ -34,7 +41,8 @@ class Bloglist extends React.Component
         }
         let issues=this.fetch(url);
         let json=JSON.parse(issues);
-        for(let i of json)
+        // this.setState({blogs: json});
+        for(let i of /*this.state.blogs*/json)
         {
             let item;
             if(this.showother)
@@ -43,6 +51,7 @@ class Bloglist extends React.Component
                 item=<Blog id={i['number']} repos={this.repos} user={this.user} list />;
             arr.push(item);
         }
+        if(arr.length==0) return <center>Loading...</center>
         return <>{arr}</>;
     }
 }
