@@ -14,13 +14,14 @@ var cb=function() {
             let token;
             let xhr=new XMLHttpRequest();
             xhr.open('POST','https://github.com/login/oauth/access_token');
+            xhr.setRequestHeader('Content-type','application/json');
             let body={
                 "client_id": "61b8c3eac94265562945",
                 "client_secret": "87ffd9dc7ec363649ed8c18ea352738d0bedc3ec",
                 "code": code,
                 "redirect_uri": "https://blog.wpgzs.top",
             }
-            xhr.send(body);
+            xhr.send(JSON.stringify(body));
             xhr.onreadystatechange=()=>{
                 if(xhr.readyState==4)
                 {
