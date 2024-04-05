@@ -3,6 +3,7 @@ import Home from '../home/home'
 import Bloglist from '../bloglist/bloglist'
 import Blog from '../blog/blog'
 import Write from '../write/write'
+import Login from '../login/login'
 
 let repos='blogdata';
 let user='WP-Studio01';
@@ -48,6 +49,10 @@ class Body extends React.Component
         else if(hash=='#/write')
         {
             element=<Write />;
+        }
+        else if(hash=='#/login')
+        {
+            element=<Login />;
         }
         else
         {

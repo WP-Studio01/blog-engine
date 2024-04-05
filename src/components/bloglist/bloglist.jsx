@@ -12,10 +12,11 @@ class Bloglist extends React.Component
         this.showclose=!!props.showclose;
         this.state={blogs: []};
     }
-    fetch(url)
+    fetch(url,token)
     {
         let xhr=new XMLHttpRequest();
         xhr.open('GET',url,false);
+        xhr.setRequestHeader('Authorization', 'token '+token);
         xhr.send(null);
         return xhr.responseText;
     }
@@ -39,7 +40,7 @@ class Bloglist extends React.Component
             if(!this.showother) url+='&';
             url+='state=open';
         }
-        let issues=this.fetch(url);
+        let issues=this.fetch(url,window.localStorage.getItem('token'));
         let json=JSON.parse(issues);
         // this.setState({blogs: json});
         for(let i of /*this.state.blogs*/json)

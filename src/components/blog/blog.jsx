@@ -13,20 +13,21 @@ class Blog extends React.Component
         this.showauthor=!!props.showauthor;
         this.state={};
     }
-    fetch(url)
+    fetch(url,token)
     {
         let xhr=new XMLHttpRequest();
         xhr.open('GET',url,false);
+        xhr.setRequestHeader('Authorization', 'token '+token);
         xhr.send(null);
         return xhr.responseText;
     }
     componentDidMount()
     {
         let url="https://api.github.com/repos/"+this.user+"/"+this.repos+"/issues/"+this.id;
-        let json=JSON.parse(this.fetch(url));
+        let json=JSON.parse(this.fetch(url,window.localStorage.getItem('token')));
         this.setState({title: json['title']});
         this.setState({body: json['body']});
-        let userpro=JSON.parse(this.fetch(json['user']['url']));
+        let userpro=JSON.parse(this.fetch(json['user']['url'],window.localStorage.getItem('token')));
         this.setState({author: userpro['name']})
     }
     /*componentDidMount()
