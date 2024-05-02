@@ -10,25 +10,11 @@ class Bloglist extends React.Component
         this.user=props.user;
         this.showother=!!props.showother;
         this.showclose=!!props.showclose;
-        this.state={blogs: []};
-    }
-    fetch(url,token)
-    {
-        let xhr=new XMLHttpRequest();
-        xhr.open('GET',url,false);
-        xhr.setRequestHeader('Authorization', 'token '+token);
-        xhr.send(null);
-        return xhr.responseText;
+        this.state={blogs: null};
     }
     componentDidMount()
     {
-        setTimeout(async ()=>{
-            return 0;
-        },0);
-    }
-    render()
-    {
-        let arr=[];
+        // window.alert('666','666',(a)=>{},{showOK:1});
         let url='https://api.github.com/repos/'+this.user+'/'+this.repos+'/issues?';
         if(!this.showother)
         {
@@ -40,10 +26,29 @@ class Bloglist extends React.Component
             if(!this.showother) url+='&';
             url+='state=open';
         }
-        let issues=this.fetch(url,window.localStorage.getItem('token'));
-        let json=JSON.parse(issues);
-        // this.setState({blogs: json});
-        for(let i of /*this.state.blogs*/json)
+        let token=window.localStorage.getItem('token');
+        let xhr=new XMLHttpRequest();
+        xhr.open('GET',url,false);
+        if(token) xhr.setRequestHeader('Authorization', 'token '+token);
+        xhr.send(null);
+        xhr.onreadystatechange=function(){
+            console.log(xhr.readyState);
+            if(xhr.readyState === xhr.DONE && xhr.status === 200)
+            {
+                let issues=xhr.responseText;
+                let json=JSON.parse(issues);
+                console.log(json);
+                this.setState({blogs: json});
+                console.log(this.render());
+                this.forceUpdate();
+            }
+        };
+    }
+    render()
+    {
+        if(!this.state.blogs) return <center>Loading...</center>
+        let arr=[];
+        for(let i of this.state.blogs)
         {
             let item;
             if(this.showother)
@@ -52,7 +57,6 @@ class Bloglist extends React.Component
                 item=<Blog id={i['number']} repos={this.repos} user={this.user} list />;
             arr.push(item);
         }
-        if(arr.length==0) return <center>Loading...</center>
         return <>{arr}</>;
     }
 }

@@ -1,0 +1,29 @@
+.dialog {
+    padding: 10px;
+    position: fixed;
+    /* top: 50%;
+    left: 50%; */
+    left: 50%;
+    top: 50%;
+    transform: translateX(-150%),translateY(-150%);
+    width: 300px;
+    height: 300px;
+    border: 2px solid black;
+    border-radius: 5%;
+}
+.dialogclose {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: blue;
+    margin: 5px;
+    font-size: 1.5em;
+}
+.dialogtitle {
+    background-color: #404040;
+    color: white;
+    position: absolute;
+    width: 90%;
+    margin: auto;
+}

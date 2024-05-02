@@ -14,7 +14,7 @@ class Nav extends React.Component
         let ar=[];
         for(let i=0;i<this.props.title.length;i++)
         {
-            ar.push(<a className="menuitem" href={this.props.hrefs[i]}>{this.props.title[i]}</a>)
+            ar.push(<a key={i} className="menuitem" href={this.props.hrefs[i]}>{this.props.title[i]}</a>)
         }
         return <>{ar}</>;
     }

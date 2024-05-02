@@ -48,6 +48,7 @@ class Write extends React.Component
                 }
             }
         };
+        e.target.style.display='none';
     }
     render()
     {
